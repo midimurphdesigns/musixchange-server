@@ -1,0 +1,26 @@
+[
+    {
+        "image": "http: //image.png",
+        "instrumentType": "ELECTRIC_GUITAR",
+        "instrumentName": "stratocaster",
+        "condition": "like new",
+        "description": "this guitar shreds and has good tone",
+        "price": "$450"
+    },
+    {
+        "image": "http: //image.png",
+        "instrumentType": "ACOUSTIC_GUITAR",
+        "instrumentName": "martin",
+        "condition": "gently used",
+        "description": "this guitar sounds great and has a big sound",
+        "price": "$350"
+    },
+    {
+        "image": "http: //image.png",
+        "instrumentType": "BASS",
+        "instrumentName": "schecter stilleto 4",
+        "condition": "poor",
+        "description": "this guitar is cool because it has a slim neck, nice contour, and heavy-duty pickups",
+        "price": "$200"
+    }
+]

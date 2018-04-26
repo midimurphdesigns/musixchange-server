@@ -1,7 +1,7 @@
 {
-  "name": "thinkful-backend-template",
+  "name": "musixchange",
   "version": "1.0.0",
-  "description": "Template for an Express backend",
+  "description": "These files allow the musixchange app to store data on a backend server",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -12,16 +12,20 @@
     "heroku": "node index.js",
     "travis": "npm run mocha"
   },
-  "author": "Joe Turner <jturner@thinkful.com>",
-  "license": "MIT",
+  "author": "Kevin Murphy <midimurphdesigns@gmail.com>",
+  "license": "don't steal this app, yo",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "knex": "^0.14.4",
+    "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.6",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.3",
-    "pg": "^7.4.1"
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

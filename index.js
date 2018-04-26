@@ -22,6 +22,16 @@ app.use(
   })
 );
 
+app.get('/api/ads', (re, res) => {
+  return res.json(
+    [
+      "test 1",
+      "test 2",
+      "test 3"
+    ]
+  )
+})
+
 function runServer(port = PORT) {
   const server = app
     .listen(port, () => {
