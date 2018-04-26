@@ -8,6 +8,9 @@ const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
+const Ad = require('./schemas/ad')
+const User = require('./schemas/user')
+
 const app = express();
 
 app.use(
@@ -22,14 +25,13 @@ app.use(
   })
 );
 
-app.get('/api/ads', (re, res) => {
-  return res.json(
-    [
-      "test 1",
-      "test 2",
-      "test 3"
-    ]
-  )
+app.get('/api/ads', (req, res) => {
+
+  Ad.find().then((data) => {
+    console.log(data)
+    return res.json(data)
+  })
+
 })
 
 function runServer(port = PORT) {

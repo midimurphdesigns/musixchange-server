@@ -2,14 +2,14 @@
 
 const mongoose = require('mongoose');
 
-const { MONGODB_URI } = require('../config');
+const { DATABASE_URL } = require('../config');
 const User = require('../schemas/user');
 const Ad = require('../schemas/ad');
 
 const seedAds = require('../seed/ads');
 const seedUsers = require('../seed/users');
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(DATABASE_URL)
     .then(() => mongoose.connection.db.dropDatabase())
     .then(() => {
         return Promise.all([
