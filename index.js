@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
@@ -12,6 +13,8 @@ const Ad = require('./schemas/ad')
 const User = require('./schemas/user')
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -26,12 +29,16 @@ app.use(
 );
 
 app.get('/api/ads', (req, res) => {
-
   Ad.find().then((data) => {
     console.log(data)
     return res.json(data)
   })
+})
 
+app.post('/api/ads', (req, res) => {
+  Ad.create(req.body).then((data) => {
+    return res.json(data)
+  })
 })
 
 function runServer(port = PORT) {
