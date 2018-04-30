@@ -1,8 +1,11 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
-const cors = require('cors');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require('passport');;
 const bodyParser = require('body-parser');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
@@ -11,6 +14,10 @@ const { dbConnect } = require('./db-mongoose');
 
 const Ad = require('./schemas/ad')
 const User = require('./schemas/user')
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+
+mongoose.Promise = global.Promise;
 
 const app = express();
 
@@ -28,6 +35,21 @@ app.use(
   })
 );
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+// A protected endpoint which needs a valid JWT to access it
+app.get('/api/protected', jwtAuth, (req, res) => {
+  return res.json({
+    data: 'rosebud'
+  });
+});
+
 app.get('/api/ads', (req, res) => {
   Ad.find().then((data) => {
     console.log(data)
@@ -41,24 +63,65 @@ app.post('/api/ads', (req, res) => {
   })
 })
 
-app.post('/api/auth/login', (req, res) => {
-  
+app.post('/api/users', (req, res) => {
+  User.create(req.body).then((data) => {
+    return res.json(data)
+  })
 })
 
-function runServer(port = PORT) {
-  const server = app
-    .listen(port, () => {
-      console.info(`App listening on port ${server.address().port}`);
-    })
-    .on('error', err => {
-      console.error('Express failed to start');
-      console.error(err);
+app.post('/api/auth/login', (req, res) => {
+  User.create(req.body).then((data) => {
+    return res.json(data)
+  })
+})
+
+function runServer(databaseUrl, port = PORT) {
+
+  return new Promise((resolve, reject) => {
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
     });
+  });
+}
+
+// const server = app
+//   .listen(port, () => {
+//     console.info(`App listening on port ${server.address().port}`);
+//   })
+//   .on('error', err => {
+//     console.error('Express failed to start');
+//     console.error(err);
+//   });
+// }
+
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  });
 }
 
 if (require.main === module) {
-  dbConnect();
-  runServer();
+  runServer(DATABASE_URL).catch(err => console.error(err));
+  // dbConnect();
+  // runServer();
 }
 
-module.exports = { app };
+module.exports = { app, runServer, closeServer };
