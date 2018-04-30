@@ -5,7 +5,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const passport = require('passport');;
+const passport = require('passport');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
@@ -14,8 +15,8 @@ const { dbConnect } = require('./db-mongoose');
 
 const Ad = require('./schemas/ad')
 const User = require('./schemas/user')
-const { router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { router: usersRouter } = require('./strategies');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./strategies');
 
 mongoose.Promise = global.Promise;
 
