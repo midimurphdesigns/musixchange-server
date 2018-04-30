@@ -41,6 +41,10 @@ app.post('/api/ads', (req, res) => {
   })
 })
 
+app.post('/api/auth/login', (req, res) => {
+  
+})
+
 function runServer(port = PORT) {
   const server = app
     .listen(port, () => {

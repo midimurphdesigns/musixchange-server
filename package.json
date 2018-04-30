@@ -12,6 +12,7 @@
     "heroku": "node index.js",
     "travis": "npm run mocha"
   },
+  "keywords": [],
   "author": "Kevin Murphy <midimurphdesigns@gmail.com>",
   "license": "don't steal this app, yo",
   "dependencies": {
@@ -31,6 +32,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "faker": "^4.1.0",
     "mocha": "^5.0.4",
     "nyc": "^11.6.0"
   }
