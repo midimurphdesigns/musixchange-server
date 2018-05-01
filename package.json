@@ -1,19 +1,15 @@
 {
   "name": "musixchange",
   "version": "1.0.0",
-  "description":
-    "These files allow the musixchange app to store data on a backend server",
+  "description": "These files allow the musixchange app to store data on a backend server",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "mocha":
-      "mocha --exit --file test/setup.test.js '!(node_modules)/**/*test.js'",
-    "mocha-exit0":
-      "mocha --exit --file test/setup.test.js '!(node_modules)/**/*test.js' || true",
+    "mocha": "mocha --exit --file test/setup.test.js '!(node_modules)/**/*test.js'",
+    "mocha-exit0": "mocha --exit --file test/setup.test.js '!(node_modules)/**/*test.js' || true",
     "test": "nodemon --exec npm run mocha-exit0",
-    "cover":
-      "nodemon --exec nyc --reporter=lcov --reporter=text-summary npm run mocha-exit0",
+    "cover": "nodemon --exec nyc --reporter=lcov --reporter=text-summary npm run mocha-exit0",
     "travis": "npm run mocha"
   },
   "keywords": [],
@@ -25,6 +21,7 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "joi": "^13.2.0",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.6",
     "morgan": "^1.9.0",

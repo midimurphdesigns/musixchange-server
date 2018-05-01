@@ -9,21 +9,28 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
+userSchema.pre('save', function(next) {
+  if (this.isModified('password')) {
+    this.password = this.hashPassword(this.password);
+  }
+
+  return next();
+});
+
 userSchema.methods = {
   toJSON() {
     return {
       id: this._id,
-      username: this._username,
-      email: this._email,
+      username: this.username,
+      email: this.email,
     };
   },
   validatePassword(password) {
     return bcrypt.compare(password, this.password);
   },
-};
-
-userSchema.statics.hashPassword = function(password) {
-  return bcrypt.hash(password, 10);
+  hashPassword(password) {
+    return bcrypt.hashSync(password, 10);
+  },
 };
 
 module.exports = mongoose.model('User', userSchema);

@@ -1140,6 +1140,10 @@ he@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+hoek@5.x.x:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-5.0.3.tgz#b71d40d943d0a95da01956b547f83c4a5b4a34ac"
+
 hosted-git-info@^2.1.4:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
@@ -1438,6 +1442,12 @@ isarray@1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
+isemail@3.x.x:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/isemail/-/isemail-3.1.2.tgz#937cf919002077999a73ea8b1951d590e84e01dd"
+  dependencies:
+    punycode "2.x.x"
+
 isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
@@ -1498,6 +1508,14 @@ istanbul-reports@^1.4.0:
   resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-1.4.0.tgz#3d7b44b912ecbe7652a603662b962120739646a1"
   dependencies:
     handlebars "^4.0.3"
+
+joi@^13.2.0:
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-13.2.0.tgz#72307f1765bb40b068361f9368a4ba1092b8478e"
+  dependencies:
+    hoek "5.x.x"
+    isemail "3.x.x"
+    topo "3.x.x"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
@@ -2314,6 +2332,10 @@ pstree.remy@^1.1.0:
   dependencies:
     ps-tree "^1.1.0"
 
+punycode@2.x.x:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
+
 qs@6.5.1, qs@^6.1.0, qs@^6.2.0:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
@@ -2859,6 +2881,12 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+topo@3.x.x:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/topo/-/topo-3.0.0.tgz#37e48c330efeac784538e0acd3e62ca5e231fe7a"
+  dependencies:
+    hoek "5.x.x"
 
 touch@^3.1.0:
   version "3.1.0"
