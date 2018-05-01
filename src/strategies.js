@@ -1,15 +1,17 @@
 'use strict';
+
 const { Strategy: LocalStrategy } = require('passport-local');
-const passport = require('passport');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
-const User = require('./modules/ad/model');
+const passport = require('passport');
+const User = require('./modules/user/model');
 const { JWT_SECRET } = require('./configs/constants');
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
-  User.findOne({ username: username })
+  User.findOne({ username })
     .then(_user => {
+      console.log('user ---->', _user)
       user = _user;
       if (!user) {
         // Return a rejected promise so we break out of the chain of .thens.

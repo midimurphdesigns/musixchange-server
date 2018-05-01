@@ -8,9 +8,11 @@ const morgan = require('morgan');
 const passport = require('passport');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const { PORT, CLIENT_ORIGIN, DATABASE_URL } = require('./configs/constants');
 const { dbConnect } = require('./configs/db');
+const config = require('./configs/constants');
 const userRoutes = require('./modules/user/routes');
 const adRoutes = require('./modules/ad/routes');
 
@@ -21,6 +23,7 @@ const { localStrategy, jwtStrategy, jwtAuth } = require('./strategies');
 mongoose.Promise = global.Promise;
 
 const app = express();
+const router = express.Router();
 
 app.use(bodyParser.json());
 
@@ -41,41 +44,28 @@ passport.use(jwtStrategy);
 
 app.use('/api/users', userRoutes);
 app.use('/api/ads', adRoutes);
+app.use('/api/auth', router);
 
-// app.use('/api/users/', usersRouter);
-// app.use('/api/auth/', authRouter);
+const createAuthToken = function (user) {
+  return jwt.sign({ user }, config.JWT_SECRET, {
+    subject: user.username,
+    expiresIn: config.JWT_EXPIRY,
+    algorithm: 'HS256'
+  });
+};
 
-// A protected endpoint which needs a valid JWT to access it
-// app.get('/api/protected', jwtAuth, (req, res) => {
-//   return res.json({
-//     data: 'rosebud',
-//   });
-// });
+const localAuth = passport.authenticate('local', { session: false });
+router.use(bodyParser.json());
+router.post('/login', localAuth, (req, res) => {
+  const authToken = createAuthToken(req.user.toJSON());
+  res.json({ authToken });
+});
 
-// app.get('/api/ads', (req, res) => {
-//   Ad.find().then(data => {
-//     console.log(data);
-//     return res.json(data);
-//   });
-// });
-
-// app.post('/api/ads', (req, res) => {
-//   Ad.create(req.body).then(data => {
-//     return res.json(data);
-//   });
-// });
-
-// app.post('/api/users', (req, res) => {
-//   User.create(req.body).then(data => {
-//     return res.json(data);
-//   });
-// });
-
-// app.post('/api/auth/login', (req, res) => {
-//   User.create(req.body).then(data => {
-//     return res.json(data);
-//   });
-// });
+// const jwtAuth = passport.authenticate('jwt', { session: false });
+router.post('/refresh', jwtAuth, (req, res) => {
+  const authToken = createAuthToken(req.user);
+  res.json({ authToken });
+});
 
 let server;
 
@@ -118,4 +108,4 @@ if (require.main === module) {
   // runServer();
 }
 
-module.exports = { app, runServer, closeServer };
+module.exports = { app, runServer, closeServer, router };

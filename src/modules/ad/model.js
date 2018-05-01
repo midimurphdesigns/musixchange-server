@@ -17,6 +17,12 @@ adSchema.methods = {
     return {
       id: this._id,
       title: this.title,
+      image: this.image,
+      instrumentType: this.instrumentType,
+      instrumentName: this.instrumentName,
+      description: this.description,
+      condition: this.condition,
+      price: this.price
     };
   },
 
