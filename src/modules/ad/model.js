@@ -10,7 +10,7 @@ const adSchema = new mongoose.Schema({
   description: { type: String, required: true },
   condition: { type: String, required: true },
   price: { type: String, required: true },
-  author: { type: mongoose.Schema.Types.ObjectId, ref:'User'}
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 adSchema.methods = {
@@ -24,14 +24,14 @@ adSchema.methods = {
       description: this.description,
       condition: this.condition,
       price: this.price,
-      author: this.author
+      author: this.author,
       // author: this.populate('author')
     };
   },
 
   helloWorld() {
-    return 'hello world'
-  }
+    return 'hello world';
+  },
 };
 
 module.exports = mongoose.model('Ad', adSchema);

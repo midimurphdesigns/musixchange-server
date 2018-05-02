@@ -26,4 +26,8 @@ exports.register = (req, res) => {
     });
 };
 
-exports.login = (req, res) => {};
+exports.me = (req, res) => {
+  User.findById(req.user.id)
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json({ error: JSON.stringify(err) }));
+};
