@@ -24,6 +24,8 @@ const app = express();
 const router = express.Router();
 
 app.use(bodyParser.json());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -31,14 +33,17 @@ app.use(
   }),
 );
 
+app.use((req, res, next) => {
+  console.log('user', req.user)
+  console.log('headers', req.headers)
+  next()
+})
+
 app.use(
   cors({
     origin: CLIENT_ORIGIN,
   }),
 );
-
-passport.use(localStrategy);
-passport.use(jwtStrategy);
 
 app.use('/api/users', userRoutes);
 app.use('/api/ads', adRoutes);
@@ -53,7 +58,6 @@ const createAuthToken = function (user) {
 };
 
 const localAuth = passport.authenticate('local', { session: false });
-router.use(bodyParser.json());
 router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user.toJSON());
   res.json({ authToken });
