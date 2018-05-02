@@ -7,38 +7,41 @@ const passport = require('passport');
 const User = require('./modules/user/model');
 const { JWT_SECRET } = require('./configs/constants');
 
-const localStrategy = new LocalStrategy((username, password, callback) => {
-  let user;
-  User.findOne({ username })
-    .then(_user => {
-      console.log('user ---->', _user)
-      user = _user;
-      if (!user) {
-        // Return a rejected promise so we break out of the chain of .thens.
-        // Any errors like this will be handled in the catch block.
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username or password',
-        });
-      }
-      return user.validatePassword(password);
-    })
-    .then(isValid => {
-      if (!isValid) {
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username or password',
-        });
-      }
-      return callback(null, user);
-    })
-    .catch(err => {
-      if (err.reason === 'LoginError') {
-        return callback(null, false, err);
-      }
-      return callback(err, false);
-    });
-});
+const localOpts = {
+  usernameField: 'username',
+};
+
+const localStrategy = new LocalStrategy(
+  localOpts,
+  (username, password, callback) => {
+    let user;
+
+    console.log('====================================');
+    console.log('login', { username, password });
+    console.log('====================================');
+    User.findOne({ username })
+      .then(_user => {
+        console.log('user ---->', _user);
+        user = _user;
+        if (!user) {
+          return callback(null, false);
+        }
+        return user.validatePassword(password);
+      })
+      .then(isValid => {
+        if (!isValid) {
+          return callback(null, false);
+        }
+        return callback(null, user);
+      })
+      .catch(err => {
+        if (err.reason === 'LoginError') {
+          return callback(null, false, err);
+        }
+        return callback(err, false);
+      });
+  },
+);
 
 const jwtStrategy = new JwtStrategy(
   {
@@ -47,11 +50,13 @@ const jwtStrategy = new JwtStrategy(
     algorithms: ['HS256'],
   },
   (payload, done) => {
-    console.log('payload', payload)
+    console.log('payload', payload);
     done(null, payload.user);
   },
 );
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-module.exports = { localStrategy, jwtStrategy, jwtAuth };
+const localAuth = passport.authenticate('local', { session: false });
+
+module.exports = { localStrategy, jwtStrategy, jwtAuth, localAuth };
