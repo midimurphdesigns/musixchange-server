@@ -16,8 +16,6 @@ const config = require('./configs/constants');
 const userRoutes = require('./modules/user/routes');
 const adRoutes = require('./modules/ad/routes');
 
-// const Ad = require('./schemas/ad');
-// const User = require('./schemas/user');
 const { localStrategy, jwtStrategy, jwtAuth } = require('./strategies');
 
 mongoose.Promise = global.Promise;
@@ -49,7 +47,7 @@ app.use('/api/auth', router);
 const createAuthToken = function (user) {
   return jwt.sign({ user }, config.JWT_SECRET, {
     subject: user.username,
-    expiresIn: config.JWT_EXPIRY,
+    // expiresIn: config.JWT_EXPIRY,
     algorithm: 'HS256'
   });
 };

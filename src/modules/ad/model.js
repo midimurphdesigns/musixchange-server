@@ -10,6 +10,7 @@ const adSchema = new mongoose.Schema({
   description: { type: String, required: true },
   condition: { type: String, required: true },
   price: { type: String, required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref:'User'}
 });
 
 adSchema.methods = {
@@ -22,7 +23,9 @@ adSchema.methods = {
       instrumentName: this.instrumentName,
       description: this.description,
       condition: this.condition,
-      price: this.price
+      price: this.price,
+      author: this.author
+      // author: this.populate('author')
     };
   },
 
