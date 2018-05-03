@@ -35,16 +35,16 @@ module.exports = app => {
   //   origin: CLIENT_ORIGIN,
   // }))
 
-  // app.use(cors());
+  app.use(cors());
 
-  app.use(cors({
-    // 'allowedHeaders': ['sessionId', 'Content-Type'],
-    // 'exposedHeaders': ['sessionId'],
-    credentials: true,
-    'origin': '*',
-    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false,
-  }));
+  // app.use(cors({
+  //   'allowedHeaders': ['sessionId', 'Content-Type', 'Authorization'],
+  //   // 'exposedHeaders': ['sessionId'],
+  //   credentials: true,
+  //   'origin': '*',
+  //   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  //   'preflightContinue': false,
+  // }));
 
   // app.use(function(req, res, next) {
   //   res.header('Access-Control-Allow-Origin', '*');

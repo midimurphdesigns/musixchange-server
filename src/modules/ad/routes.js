@@ -5,7 +5,7 @@ const { jwtAuth } = require('../../strategies');
 
 const routes = Router();
 
-routes.get('/users/ads', jwtAuth, getFromUser);
+routes.get('/me', jwtAuth, getFromUser);
 routes.get('/', getAll);
 routes.get('/:id', getById);
 routes.post('/', jwtAuth, create);
