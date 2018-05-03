@@ -32,10 +32,30 @@ exports.create = (req, res) => {
 exports.remove = (req, res) => {
   Ad.findById(req.params.id).then(ad => {
     if (ad.author.toString() !== req.user.id) {
-      return res.sendStatus(401)
+      return res.sendStatus(401);
     }
     ad.remove().then(() => {
-      return res.status(204).json({success: true})
-    })
-  })
-}
+      return res.status(204).json({ success: true });
+    });
+  });
+};
+
+exports.update = (req, res) => {
+  Ad.findById(req.params.id).then(ad => {
+    if (ad.author.toString() !== req.user.id) {
+      return res.sendStatus(401);
+    }
+
+    const newAd = ad;
+
+    Object.keys(req.body).forEach(key => {
+      if (key !== 'id') {
+        newAd[key] = req.body[key];
+      }
+    });
+
+    newAd.save().then(() => {
+      return res.status(200).json(newAd);
+    });
+  });
+};
