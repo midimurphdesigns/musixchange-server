@@ -10,15 +10,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
-const { PORT, CLIENT_ORIGIN, DATABASE_URL } = require('./configs/constants');
-const { dbConnect } = require('./configs/db');
-const config = require('./configs/constants');
-const userRoutes = require('./modules/user/routes');
-const postRoutes = require('./modules/post/routes');
-const authRoutes = require('./modules/auth/routes');
-const middlewaresConfig = require('./configs/middlewares');
+const { PORT, CLIENT_ORIGIN, DATABASE_URL } = require('./src/configs/constants');
+const { dbConnect } = require('./src/configs/db');
+const config = require('./src/configs/constants');
+const userRoutes = require('./src/modules/user/routes');
+const postRoutes = require('./src/modules/post/routes');
+const authRoutes = require('./src/modules/auth/routes');
+const middlewaresConfig = require('./src/configs/middlewares');
 
-const { jwtAuth } = require('./strategies');
+const { jwtAuth } = require('./src/strategies');
 
 mongoose.Promise = global.Promise;
 
@@ -28,14 +28,10 @@ const router = express.Router();
 middlewaresConfig(app);
 
 app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
 
-// // const jwtAuth = passport.authenticate('jwt', { session: false });
-// router.post('/refresh', jwtAuth, (req, res) => {
-//   const authToken = createAuthToken(req.user);
-//   res.json({ authToken });
-// });
+app.use(passport.authenticate('jwt', { session: false, failWithError: true }))
+app.use('/api/posts', postRoutes);
 
 let server;
 
@@ -74,8 +70,6 @@ function closeServer() {
 
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
-  // dbConnect();
-  // runServer();
 }
 
 module.exports = { app, runServer, closeServer, router };

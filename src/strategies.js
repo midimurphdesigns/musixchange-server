@@ -15,10 +15,6 @@ const localStrategy = new LocalStrategy(
   localOpts,
   (username, password, callback) => {
     let user;
-
-    console.log('====================================');
-    console.log('login', { username, password });
-    console.log('====================================');
     User.findOne({ username })
       .then(_user => {
         console.log('user ---->', _user);
