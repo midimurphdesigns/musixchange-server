@@ -30,7 +30,7 @@ middlewaresConfig(app);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 
-app.use(passport.authenticate('jwt', { session: false, failWithError: true }))
+// app.use(passport.authenticate('jwt', { session: false, failWithError: true }))
 app.use('/api/posts', postRoutes);
 
 let server;
