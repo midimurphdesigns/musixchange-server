@@ -27,7 +27,6 @@ exports.register = (req, res) => {
 };
 
 exports.me = (req, res) => {
-  console.log('! ------')
   User.findById(req.user.id)
     .then(user => res.status(200).json(user))
     .catch(err => res.status(400).json({ error: JSON.stringify(err) }));
