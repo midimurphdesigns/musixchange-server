@@ -14,7 +14,7 @@ const { PORT, CLIENT_ORIGIN, DATABASE_URL } = require('./configs/constants');
 const { dbConnect } = require('./configs/db');
 const config = require('./configs/constants');
 const userRoutes = require('./modules/user/routes');
-const adRoutes = require('./modules/ad/routes');
+const postRoutes = require('./modules/post/routes');
 const authRoutes = require('./modules/auth/routes');
 const middlewaresConfig = require('./configs/middlewares');
 
@@ -28,7 +28,7 @@ const router = express.Router();
 middlewaresConfig(app);
 
 app.use('/api/users', userRoutes);
-app.use('/api/ads', adRoutes);
+app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
 
 // // const jwtAuth = passport.authenticate('jwt', { session: false });

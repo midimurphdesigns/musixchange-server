@@ -1,7 +1,7 @@
-const Ad = require('./model');
+const Post = require('./model');
 
 exports.getAll = (req, res) => {
-  Ad.find()
+  Post.find()
     .populate('author')
     .then(data => {
       return res.json(data);
@@ -9,7 +9,7 @@ exports.getAll = (req, res) => {
 };
 
 exports.getById = (req, res) => {
-  Ad.findById(req.params.id)
+  Post.findById(req.params.id)
     .populate('author')
     .then(data => {
       return res.json(data);
@@ -17,45 +17,45 @@ exports.getById = (req, res) => {
 };
 
 exports.getFromUser = (req, res) => {
-  Ad.find({ author: req.user.id }).then(data => {
+  Post.find({ author: req.user.id }).then(data => {
     return res.json(data);
   });
 };
 
 exports.create = (req, res) => {
   const data = Object.assign({}, req.body, { author: req.user.id });
-  Ad.create(data).then(data => {
+  Post.create(data).then(data => {
     return res.json(data);
   });
 };
 
 exports.remove = (req, res) => {
-  Ad.findById(req.params.id).then(ad => {
-    if (ad.author.toString() !== req.user.id) {
+  Post.findById(req.params.id).then(post => {
+    if (post.author.toString() !== req.user.id) {
       return res.sendStatus(401);
     }
-    ad.remove().then(() => {
+    post.remove().then(() => {
       return res.status(204).json({ success: true });
     });
   });
 };
 
 exports.update = (req, res) => {
-  Ad.findById(req.params.id).then(ad => {
-    if (ad.author.toString() !== req.user.id) {
+  Post.findById(req.params.id).then(post => {
+    if (post.author.toString() !== req.user.id) {
       return res.sendStatus(401);
     }
 
-    const newAd = ad;
+    const newPost = post;
 
     Object.keys(req.body).forEach(key => {
       if (key !== 'id') {
-        newAd[key] = req.body[key];
+        newPost[key] = req.body[key];
       }
     });
 
-    newAd.save().then(() => {
-      return res.status(200).json(newAd);
+    newPost.save().then(() => {
+      return res.status(200).json(newPost);
     });
   });
 };

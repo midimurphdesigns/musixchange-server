@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const adSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
   title: { type: String, required: true, unique: true },
   image: { type: String, required: true },
   description: { type: String, required: true },
@@ -11,7 +11,7 @@ const adSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
-adSchema.methods = {
+postSchema.methods = {
   toJSON() {
     return {
       id: this._id,
@@ -29,4 +29,4 @@ adSchema.methods = {
   },
 };
 
-module.exports = mongoose.model('Ad', adSchema);
+module.exports = mongoose.model('Post', postSchema);

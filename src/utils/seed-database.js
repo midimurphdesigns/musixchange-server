@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 
 const { DATABASE_URL } = require('../configs/constants');
 const User = require('../modules/user/model');
-const Ad = require('../modules/ad/model');
+const Post = require('../modules/post/model');
 
-const seedAds = require('../seed/ads');
+const seedPosts = require('../seed/posts');
 const seedUsers = require('../seed/users');
 
 mongoose
@@ -14,7 +14,7 @@ mongoose
   .then(() => mongoose.connection.db.dropDatabase())
   .then(() => {
     return Promise.all([
-      Ad.insertMany(seedAds),
+      Post.insertMany(seedPosts),
       User.insertMany(seedUsers),
       User.createIndexes(),
     ]);
