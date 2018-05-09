@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const User = require('./model');
+const { createAuthToken } = require('../auth/controllers');
 
 const registerField = Joi.object().keys({
   email: Joi.string()
@@ -11,7 +12,7 @@ const registerField = Joi.object().keys({
 });
 
 exports.register = (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     Joi.validate(req.body, registerField);
   } catch (error) {
@@ -20,7 +21,8 @@ exports.register = (req, res) => {
 
   User.create(req.body)
     .then(user => {
-      return res.status(200).json(user);
+      const authToken = createAuthToken(user.toJSON());
+      return res.status(200).json({ authToken });
     })
     .catch(error => {
       return res.status(400).json({ error });
