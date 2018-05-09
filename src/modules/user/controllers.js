@@ -11,6 +11,7 @@ const registerField = Joi.object().keys({
 });
 
 exports.register = (req, res) => {
+  console.log(req.body)
   try {
     Joi.validate(req.body, registerField);
   } catch (error) {
