@@ -1,6 +1,6 @@
 # Musicschange fullstack project by Kevin Murphy
 
-## Buying and sell used music gear
+### Buy and sell used music gear
 
 The live version of this app can be found here: http://peaceful-northcutt-624dc5.netlify.com/
 
