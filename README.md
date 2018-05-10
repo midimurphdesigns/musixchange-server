@@ -9,7 +9,6 @@ I came about this idea by brainstorming how I could link my passion for music/gu
 I started thinking about how musicians frequently buy and sell gear to suit their needs, and so I came up with this idea.
 
 ## Minimum Viable Product (MVP)
----
 * Clear and fluid onboarding page that helps guide UX
 * Browsing gear for sale without logging in
 * Signup
@@ -24,14 +23,12 @@ I started thinking about how musicians frequently buy and sell gear to suit thei
 * Effective implementation of user authentication
 
 ## Upcoming Features
----
 * Ping the seller button and notifications on account page
 * Instant chat
 * Sort music gear by type via tabs and/or keyword search
 * Mobile app
 
 ## How it was built
----
 This app was built using a MERN stack
 * Mongo
 * Express
