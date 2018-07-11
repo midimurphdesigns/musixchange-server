@@ -16,7 +16,7 @@ I started thinking about how musicians frequently buy and sell gear to suit thei
 * Posting gear ads after logging in
 * Editing your ads after logging in
 * Removing your ads after logging in
-* A clear logout proceedure
+* A clear logout procedure
 * Form validation on input of information
 * Mobile responsive layout
 * Persistance of data
