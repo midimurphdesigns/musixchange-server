@@ -1,12 +1,21 @@
 # Musicschange fullstack project by Kevin Murphy
 
-### Buy and sell used music gear
+### Live App
 
 The live version of this app can be found here: http://peaceful-northcutt-624dc5.netlify.com/
 
-The main goal of this app is make it easy to find someone to buy your music gear, or find new music gear to buy.
+### Buy and sell used music gear
+
+The main goal of this app is make it easy to find someone to buy or sell music gear.
 I came about this idea by brainstorming how I could link my passion for music/guitars with web development.
 I started thinking about how musicians frequently buy and sell gear to suit their needs, and so I came up with this idea.
+
+### Screencaps
+
+![alt text](./screencaps/screencap-1.jpg "Screencap of app")
+![alt text](./screencaps/screencap-2.jpg "Screencap of app")
+![alt text](./screencaps/screencap-3.jpg "Screencap of app")
+![alt text](./screencaps/screencap-4.jpg "Screencap of app")
 
 ## Minimum Viable Product (MVP)
 * Clear and fluid onboarding page that helps guide UX
