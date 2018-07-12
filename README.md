@@ -4,7 +4,7 @@
 
 The live version of this app can be found here: http://peaceful-northcutt-624dc5.netlify.com/
 
-### Buy and sell used music gear
+### About this app
 
 The main goal of this app is make it easy to find someone to buy or sell music gear.
 I came about this idea by brainstorming how I could link my passion for music/guitars with web development.
