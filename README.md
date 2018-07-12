@@ -2,7 +2,7 @@
 
 ### Live App
 
-The live version of this app can be found here: http://peaceful-northcutt-624dc5.netlify.com/
+The live version of this app can be found here: http://musixchange.netlify.com/
 
 ### About this app
 
